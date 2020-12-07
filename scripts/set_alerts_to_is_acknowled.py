@@ -5,6 +5,7 @@ from getpass import getpass
 from typing import Dict, Any, Optional
 import csv
 
+
 def get_token(api_url: str, login: str, pwd: str) -> str:
 
     response = requests.post(f"{api_url}/login/access-token",
@@ -43,7 +44,7 @@ def main(args):
     existing_alerts = api_request('get', f"{api_url}/alerts/", superuser_auth)
     for alert in existing_alerts:
         alert["is_acknowledged"] = True
-        api_request('put', f"{api_url}/alerts/{alert['id']}", superuser_auth, payload=alert)
+        api_request('put', f"{api_url}/alerts/{alert['id']}/acknowledge", superuser_auth)
 
     print(f"SUCCESS in {time.time() - start_ts:.3}s")
 
